@@ -1,0 +1,19 @@
+FROM golang:1.14-alpine
+
+RUN apk add --no-cache git
+
+WORKDIR /app
+
+COPY go.mod .
+# COPY go.sum .
+
+RUN go mod download
+
+# For debugging
+RUN go get github.com/go-delve/delve/cmd/dlv
+
+COPY . .
+
+RUN go build -gcflags "-N -l" -o /app/build/api /app/cmd
+
+CMD ["/app/build/api"]

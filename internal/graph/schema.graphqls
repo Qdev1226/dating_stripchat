@@ -1,0 +1,29 @@
+type User {
+  id: ID!
+  uid: String!
+  name: String!
+  email: String!
+  password: String!
+}
+
+type Query {
+  me: User!
+  matches: [User!]!
+}
+
+type LikedResponse {
+    success: Boolean!
+    matched: Boolean!
+}
+
+input NewUser {
+  name: String!
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  login(email: String!, password: String!): User!
+  signup(input: NewUser!): User!
+  likeUser(userId: String!): LikedResponse!
+}

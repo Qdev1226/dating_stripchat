@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  labels:
+    app: api
+spec:
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: dating-app/api
+          command: ["/app/build/api"]
+          ports:
+            - containerPort: 3000
+            - containerPort: 40000
+          env:
+            - name: DGRAPH_HOST
+              value: dgraph-public:9080

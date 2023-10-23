@@ -1,0 +1,23 @@
+id: string @index(exact) .
+name: string @index(exact, fulltext) @count .
+email: string @index(exact) .
+password: password .
+liked: [uid] @count @reverse .
+rejected: [uid] @count @reverse .
+matched: [uid] @count @reverse .
+lives_in: uid @reverse .
+
+type User {
+    id
+    name
+    email
+    password
+    matched
+    liked
+    rejected
+    lives_in
+}
+
+type City {
+    name
+}
